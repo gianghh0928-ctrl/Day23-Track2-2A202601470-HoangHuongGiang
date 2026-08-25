@@ -1,0 +1,1 @@
+{"event": "state_change", "ts": 1787651983.4127617, "iso": "2026-08-25T09:59:43", "region": "a", "to": "UNHEALTHY", "reason": "ReadTimeout", "consecutive_fails": 3, "interval_s": 5.0, "threshold": 3}

@@ -1,0 +1,7 @@
+{"ts": 1787651987.4969687, "iso": "2026-08-25T09:59:47", "step": 1, "name": "xac_nhan_outage", "primary": "a", "primary_ready": false, "confirmed_down": true}
+{"ts": 1787651987.4979818, "iso": "2026-08-25T09:59:47", "step": 2, "name": "thong_bao_incident", "confirmed": true, "auto": true, "note": "operator confirmed failover clock started"}
+{"ts": 1787651988.1495488, "iso": "2026-08-25T09:59:48", "step": 3, "name": "scale_gpu_pool", "target": "b", "failover_result": {"ok": true, "target": "b", "rpo_seconds": 6.01, "docs_lost": 3, "waited_s": 0.3}}
+{"ts": 1787651988.1495488, "iso": "2026-08-25T09:59:48", "step": 4, "name": "verify_state_replica", "target": "b", "rpo_seconds": 6.01, "docs_lost": 3}
+{"ts": 1787651988.150553, "iso": "2026-08-25T09:59:48", "step": 5, "name": "dns_cutover", "target": "b", "ok": true}
+{"ts": 1787652010.0806797, "iso": "2026-08-25T10:00:10", "step": 6, "name": "verify_golden_signals", "requests_sent": 10, "errors": 10, "error_rate": 1.0, "p95_latency_ms": 0.0}
+{"ts": 1787652010.0806797, "iso": "2026-08-25T10:00:10", "step": 7, "name": "post_incident", "status": "COMPLETED", "elapsed_s": 25.08, "note": "Run python tools/measure_rto.py to compute final RTO/RPO"}

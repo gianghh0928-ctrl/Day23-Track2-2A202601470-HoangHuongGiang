@@ -1,0 +1,18 @@
+{"ts": 1787651987.8064232, "iso": "2026-08-25T09:59:47", "step": "1_verify_target", "target": "b", "weights": true, "count": 201, "pool_state": "full"}
+{"ts": 1787651987.8409128, "iso": "2026-08-25T09:59:47", "step": "2_restore_snapshot", "target": "b", "backend": "fs", "rpo_seconds": 6.01, "docs_lost": 3, "embed_model_version": "embed-model=vi-e5-base@v3"}
+{"ts": 1787651987.8419113, "iso": "2026-08-25T09:59:47", "step": "3_scale_pool", "target": "b", "pool_state": "full"}
+{"ts": 1787651988.147543, "iso": "2026-08-25T09:59:48", "step": "4_wait_ready", "target": "b", "ok": true, "waited_s": 0.3}
+{"ts": 1787651988.148546, "iso": "2026-08-25T09:59:48", "step": "5_dns_cutover", "target": "b"}
+{"ts": 1787652207.6918833, "iso": "2026-08-25T10:03:27", "step": "1_verify_target", "target": "b", "weights": true, "count": 269, "pool_state": "full"}
+{"ts": 1787652207.6956224, "iso": "2026-08-25T10:03:27", "step": "2_restore_snapshot", "target": "b", "backend": "fs", "rpo_seconds": 74.05, "docs_lost": 37, "embed_model_version": "test"}
+{"ts": 1787652207.6956224, "iso": "2026-08-25T10:03:27", "step": "3_scale_pool", "target": "b", "pool_state": "full"}
+{"ts": 1787652207.990889, "iso": "2026-08-25T10:03:27", "step": "4_wait_ready", "target": "b", "ok": true, "waited_s": 0.29}
+{"ts": 1787652208.0247734, "iso": "2026-08-25T10:03:28", "step": "5_dns_cutover", "target": "b"}
+{"ts": 1787652230.137765, "iso": "2026-08-25T10:03:50", "step": "1_verify_target", "target": "b", "weights": false, "count": 0, "pool_state": "unknown"}
+{"ts": 1787652230.1394057, "iso": "2026-08-25T10:03:50", "step": "2_restore_snapshot", "target": "b", "backend": "fs", "rpo_seconds": 74.05, "docs_lost": 37, "embed_model_version": "test"}
+{"ts": 1787652230.1404736, "iso": "2026-08-25T10:03:50", "step": "3_scale_pool", "target": "b", "pool_state": "full"}
+{"ts": 1787652231.1419122, "iso": "2026-08-25T10:03:51", "step": "4_wait_ready", "target": "b", "ok": false, "waited_s": 1.0, "reason": "timeout"}
+{"ts": 1787653022.0465746, "iso": "2026-08-25T10:17:02", "step": "1_verify_target", "target": "b", "weights": false, "count": 0, "pool_state": "unknown"}
+{"ts": 1787653022.049308, "iso": "2026-08-25T10:17:02", "step": "2_restore_snapshot", "target": "b", "backend": "fs", "rpo_seconds": 74.05, "docs_lost": 37, "embed_model_version": "test"}
+{"ts": 1787653022.0511594, "iso": "2026-08-25T10:17:02", "step": "3_scale_pool", "target": "b", "pool_state": "full"}
+{"ts": 1787653023.0528328, "iso": "2026-08-25T10:17:03", "step": "4_wait_ready", "target": "b", "ok": false, "waited_s": 1.0, "reason": "timeout"}

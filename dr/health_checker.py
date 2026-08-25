@@ -29,13 +29,72 @@ URL = {"a": "http://127.0.0.1:8001", "b": "http://127.0.0.1:8002"}
 
 
 def probe(region: str, timeout: float) -> tuple[bool, str]:
-    """TODO: trả về (ready, reason). Timeout PHẢI có — netblock làm request treo mãi."""
-    raise NotImplementedError
+    """Trả về (ready, reason). Timeout PHẢI có — netblock làm request treo mãi."""
+    try:
+        with httpx.Client(timeout=timeout) as c:
+            r = c.get(f"{URL[region]}/readyz")
+            if r.status_code == 200:
+                data = r.json()
+                if data.get("ready"):
+                    return True, "OK"
+                reasons = ",".join(data.get("reasons", [])) or "not_ready"
+                return False, reasons
+            return False, f"status_{r.status_code}"
+    except Exception as e:
+        return False, type(e).__name__
 
 
 def run(interval: float, timeout: float, threshold: int, duration: float, out: pathlib.Path):
-    """TODO: vòng lặp poll + phát hiện transition + ghi JSONL."""
-    raise NotImplementedError
+    """Vòng lặp poll + phát hiện transition + ghi JSONL."""
+    out = pathlib.Path(out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+
+    state = {"a": "HEALTHY", "b": "HEALTHY"}
+    fails = {"a": 0, "b": 0}
+    end_time = time.time() + duration
+
+    while time.time() < end_time:
+        loop_start = time.time()
+        for reg in ["a", "b"]:
+            ready, reason = probe(reg, timeout)
+            if ready:
+                fails[reg] = 0
+                if state[reg] == "UNHEALTHY":
+                    state[reg] = "HEALTHY"
+                    rec = {
+                        "event": "state_change",
+                        "ts": time.time(),
+                        "iso": time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime()),
+                        "region": reg,
+                        "to": "HEALTHY",
+                        "reason": reason,
+                        "consecutive_fails": 0,
+                        "interval_s": interval,
+                        "threshold": threshold,
+                    }
+                    with out.open("a") as f:
+                        f.write(json.dumps(rec) + "\n")
+            else:
+                fails[reg] += 1
+                if fails[reg] >= threshold and state[reg] == "HEALTHY":
+                    state[reg] = "UNHEALTHY"
+                    rec = {
+                        "event": "state_change",
+                        "ts": time.time(),
+                        "iso": time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime()),
+                        "region": reg,
+                        "to": "UNHEALTHY",
+                        "reason": reason,
+                        "consecutive_fails": fails[reg],
+                        "interval_s": interval,
+                        "threshold": threshold,
+                    }
+                    with out.open("a") as f:
+                        f.write(json.dumps(rec) + "\n")
+
+        elapsed = time.time() - loop_start
+        sleep_time = max(0.0, interval - elapsed)
+        time.sleep(sleep_time)
 
 
 if __name__ == "__main__":
